@@ -1,0 +1,22 @@
+﻿@model ChoixResto.Models.Resto
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Modifier un restaurant</legend>
+
+        <div>
+            @Html.LabelFor(model => model.Nom)
+            @Html.TextBoxFor(model => model.Nom)
+            <br/>
+            @Html.ValidationMessageFor(model => model.Nom, "" , new {@class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Telephone)
+            @Html.TextBoxFor(model => model.Telephone)
+            <br />
+            @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+        </div>
+        <br />
+        <input type="submit" value="Modifier" />
+    </fieldset>
+}

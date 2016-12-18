@@ -1,0 +1,48 @@
+﻿@model ChoixResto.ViewModels.AccueilViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>@Model.Date.ToString("dd/mm/yyyy")</ li >
+            <li>@Model.Message</ li >
+            <li>@Model.Resto.Nom</li>
+            <li>@Model.Resto.Telephone</li>
+        </ul>
+        
+        Je suis la vue index
+
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form" }))
+        {
+            @Html.Label("estMajeur", "Cochez la case si vous êtes <strong>majeur</strong>")
+            @Html.CheckBox("estMajeur", true)
+            @Html.TextBox("nom", Model.Resto.Nom, new { style = "color:red", @class = "ma-css" })
+            @Html.TextBoxFor(model => model.Resto.Nom)
+            @Html.TextBoxFor(Model=>Model.Resto.Telephone)
+            <input type="submit" value="Envoyer" />
+        }
+
+        @Html.DropDownList("RestoChoisi", (SelectList)ViewBag.ListeDesRestos)
+        @Html.ActionLink("Modifier le restaurant", "ModifierRestaurant", "Restaurant", new { id = Model.Resto.Id }, null)
+        @Html.Partial("Connexion", Model)
+        @Html.Action("AfficheListeRestaurant")
+    </div>
+
+    <hr />
+    <p>Prêts à choisir un restaurant ?</p>
+    @using (Html.BeginForm())
+    {
+        <input type="submit" value="Créer un sondage" />
+    }
+    <ul>
+        <li>@Html.ActionLink("Ajouter un restaurant", "CreerRestaurant", "Restaurant")</li>
+        <li>@Html.ActionLink("Modifier les restaurants", "Index", "Restaurant")</li>
+    </ul>
+</body>
+</html>
